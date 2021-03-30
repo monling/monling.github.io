@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ling-long.cn</id>
-    <title>萝卜皮</title>
-    <updated>2021-03-08T06:34:06.329Z</updated>
+    <title>玲珑科技</title>
+    <updated>2021-03-30T07:57:26.471Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ling-long.cn"/>
     <link rel="self" href="https://ling-long.cn/atom.xml"/>
-    <subtitle>技能术点歪了的绘图匠</subtitle>
+    <subtitle>分享你的福利吧~</subtitle>
     <logo>https://ling-long.cn/images/avatar.png</logo>
     <icon>https://ling-long.cn/favicon.ico</icon>
-    <rights>All rights reserved 2021, 萝卜皮</rights>
+    <rights>All rights reserved 2021, 玲珑科技</rights>
 </feed>
