@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- ç¡®ä¿å­—ç¬¦ç¼–ç ä¸º UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>±í°×ÍøÒ³</title>
+    <title>è¡¨ç™½ç½‘é¡µ</title>
     <style>
-        /* Í¨ÓÃÑùÊ½ */
+        /* é€šç”¨æ ·å¼ */
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +29,7 @@
             padding: 20px;
         }
 
-        /* °®ĞÄÑùÊ½ */
+        /* çˆ±å¿ƒæ ·å¼ */
         .heart {
             font-size: 15vw;
             color: red;
@@ -43,7 +43,7 @@
             50% { transform: scale(1.2); }
         }
 
-        /* ÎÄ×ÖÏûÏ¢ */
+        /* æ–‡å­—æ¶ˆæ¯ */
         .message {
             font-size: 6vw;
             color: #333;
@@ -51,7 +51,7 @@
             line-height: 1.5;
         }
 
-        /* ¼ÆÊ±Æ÷ÑùÊ½ */
+        /* è®¡æ—¶å™¨æ ·å¼ */
         .timer {
             font-size: 6vw;
             color: #ff69b4;
@@ -65,7 +65,7 @@
             100% { opacity: 1; }
         }
 
-        /* ÊÖ»ú¶ËÌØ¶¨ÑùÊ½ */
+        /* æ‰‹æœºç«¯ç‰¹å®šæ ·å¼ */
         @media (max-width: 768px) {
             .heart {
                 font-size: 80px;
@@ -75,7 +75,7 @@
             }
         }
 
-        /* ºáÆÁÊÊÅä */
+        /* æ¨ªå±é€‚é… */
         @media (orientation: landscape) {
             .content {
                 transform: scale(0.8);
@@ -85,37 +85,45 @@
 </head>
 <body>
     <div class="content">
-        <div class="heart" onclick="showMessage()">7Å8„1‚5</div>
-        <div class="message">ÎÒÏ²»¶Äã£¡</div>
-        <div class="timer" id="timer">ÒÑ¾­ÔÚÒ»Æğ£º<span id="days">0</span> Ìì</div>
+        <div class="heart" onclick="showMessage()">â¤ï¸</div>
+        <div class="message">æˆ‘å–œæ¬¢ä½ ï¼</div>
+        <div class="timer" id="timer">å·²ç»åœ¨ä¸€èµ·ï¼š<span id="days">0</span> å¤© <span id="hours">0</span> å°æ—¶ <span id="minutes">0</span> åˆ†é’Ÿ <span id="seconds">0</span> ç§’</div>
     </div>
 
     <script>
-        // ÉèÖÃÄãÃÇÔÚÒ»ÆğµÄÆğÊ¼ÈÕÆÚ
-        const startDate = new Date('2024-12-24'); // ĞŞ¸ÄÎªÄãÃÇµÄÆğÊ¼ÈÕÆÚ
+        // è®¾ç½®ä½ ä»¬åœ¨ä¸€èµ·çš„èµ·å§‹æ—¥æœŸ
+        const startDate = new Date('2023-10-01'); // ä¿®æ”¹ä¸ºä½ ä»¬çš„èµ·å§‹æ—¥æœŸ
 
-        // ¸üĞÂ¼ÆÊ±Æ÷
+        // æ›´æ–°è®¡æ—¶å™¨
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
+
+            // è®¡ç®—å¤©æ•°ã€å°æ—¶ã€åˆ†é’Ÿå’Œç§’
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            // ÏÔÊ¾ÌìÊı
+            // æ˜¾ç¤ºæ—¶é—´
             document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
 
-            // ¶¯Ì¬Ğ§¹û£ºÊı×Ö¹ö¶¯
-            const daysElement = document.getElementById('days');
-            daysElement.style.transition = 'color 0.5s ease-in-out';
-            daysElement.style.color = `hsl(${(days % 360)}, 100%, 50%)`; // ¸ù¾İÌìÊı±ä»¯ÑÕÉ«
+            // åŠ¨æ€æ•ˆæœï¼šæ•°å­—é¢œè‰²å˜åŒ–
+            const timerElement = document.getElementById('timer');
+            timerElement.style.transition = 'color 0.5s ease-in-out';
+            timerElement.style.color = `hsl(${(diff / 1000) % 360}, 100%, 50%)`; // æ ¹æ®æ—¶é—´å˜åŒ–é¢œè‰²
         }
 
-        // ³õÊ¼»¯¼ÆÊ±Æ÷
+        // åˆå§‹åŒ–è®¡æ—¶å™¨
         updateTimer();
-        setInterval(updateTimer, 1000); // Ã¿Ãë¸üĞÂÒ»´Î
+        setInterval(updateTimer, 1000); // æ¯ç§’æ›´æ–°ä¸€æ¬¡
 
-        // µã»÷°®ĞÄµ¯³öÏûÏ¢
+        // ç‚¹å‡»çˆ±å¿ƒå¼¹å‡ºæ¶ˆæ¯
         function showMessage() {
-            alert("¾ÍÕâÑùÒ»Ö±µÎµÎ´ğ´ğ×ßÏÂÈ¥°É”9Ø4");
+            alert("ä½ æ„¿æ„å’Œæˆ‘åœ¨ä¸€èµ·å—ï¼ŸğŸ’–");
         }
     </script>
 </body>
