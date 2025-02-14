@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8"> <!-- 确保字符编码为 UTF-8 -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>表白网页</title>
+    <title>情人节特别礼物 - 金竹 ❤️</title>
     <style>
-        /* 通用样式 */
+        /* 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -17,114 +17,227 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f9e3e3;
-            font-family: 'Arial', sans-serif;
-            padding: 20px;
+            background: linear-gradient(135deg, #ff99cc 0%, #ff6699 100%);
+            font-family: 'Microsoft YaHei', 'Sukhumvit Set', sans-serif;
+            color: #5a2d38;
+            overflow: hidden;
         }
 
-        .content {
+        /* 飘落樱花 */
+        .sakura {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* 主内容容器 */
+        .container {
             text-align: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
+            padding: 30px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255,105,180,0.3);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            position: relative;
+            z-index: 1;
         }
 
-        /* 爱心样式 */
+        /* 泰语特别样式 */
+        .thai-text {
+            font-family: 'Sukhumvit Set', sans-serif;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* 心跳爱心 */
         .heart {
             font-size: 15vw;
-            color: red;
+            color: #ff3366;
             cursor: pointer;
             animation: heartbeat 1.5s infinite;
-            margin: 0 auto;
+            text-shadow: 0 0 20px rgba(255,51,102,0.3);
+            margin: 20px 0;
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
         }
 
-        /* 文字消息 */
-        .message {
-            font-size: 6vw;
-            color: #333;
-            margin-top: 10px;
-            line-height: 1.5;
+        /* 主标题 */
+        .title {
+            font-size: 2em;
+            margin: 15px 0;
+            color: #5a2d38;
+            position: relative;
         }
 
-        /* 计时器样式 */
+        .title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: #ff3366;
+            margin: 10px auto;
+        }
+
+        /* 计时器 */
         .timer {
-            font-size: 6vw;
-            color: #ff69b4;
-            margin-top: 20px;
-            font-weight: bold;
-            animation: fadeIn 2s ease-in-out;
+            font-size: 1.5em;
+            color: #5a2d38;
+            margin: 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            display: inline-block;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .timer span {
+            display: inline-block;
+            min-width: 60px;
+            padding: 5px 10px;
+            background: #ff3366;
+            color: white;
+            border-radius: 5px;
+            margin: 0 3px;
         }
 
-        /* 手机端特定样式 */
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .heart {
-                font-size: 80px;
-            }
-            .message, .timer {
-                font-size: 24px;
-            }
+            .heart { font-size: 80px; }
+            .title { font-size: 1.5em; }
+            .timer { font-size: 1.2em; }
+            .thai-text { font-size: 1em; }
         }
 
-        /* 横屏适配 */
-        @media (orientation: landscape) {
-            .content {
-                transform: scale(0.8);
-            }
+        /* 信封动画 */
+        .envelope {
+            position: fixed;
+            bottom: -100px;
+            right: 20px;
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            opacity: 0.9;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div class="heart" onclick="showMessage()">❤️</div>
-        <div class="message">我喜欢你！</div>
-        <div class="timer" id="timer">已经在一起：<span id="days">0</span> 天 <span id="hours">0</span> 小时 <span id="minutes">0</span> 分钟 <span id="seconds">0</span> 秒</div>
+    <!-- 飘落樱花 -->
+    <div class="sakura" style="left:10%;animation-duration:8s;"></div>
+    <div class="sakura" style="left:30%;animation-duration:10s;"></div>
+    <div class="sakura" style="left:50%;animation-duration:7s;"></div>
+
+    <!-- 主内容 -->
+    <div class="container">
+        <div class="thai-text">สุขสันต์วันวาเลนไทน์ที่รักของฉัน ❤️</div>
+        <div class="heart" onclick="showSurprise()">❤️</div>
+        <h1 class="title">致我最爱的金竹</h1>
+        
+        <div class="thai-text">ไม่ว่าเราจะห่างกันแค่ไหน...<br>หัวใจของฉันจะเป็นของคุณเสมอ</div>
+        
+        <div class="timer">
+            我们的爱情已经持续：<br>
+            <span id="days">0</span> 天 
+            <span id="hours">0</span> 时 
+            <span id="minutes">0</span> 分 
+            <span id="seconds">0</span> 秒
+        </div>
+
+        <p>从曼谷到合肥<br>2643公里的距离<br>却隔不断心的靠近</p>
     </div>
 
+    <!-- 浮动信封 -->
+    <div class="envelope" onclick="showLetter()">✉️</div>
+
     <script>
-        // 设置你们在一起的起始日期
-        const startDate = new Date('2023-10-01'); // 修改为你们的起始日期
+        // 设置纪念日（修改为你们开始交往的日期）
+        const startDate = new Date('2024-12-24');
 
         // 更新计时器
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
 
-            // 计算天数、小时、分钟和秒
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            const days = Math.floor(diff / (86400000));
+            const hours = Math.floor((diff % 86400000) / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
 
-            // 显示时间
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours;
             document.getElementById('minutes').textContent = minutes;
             document.getElementById('seconds').textContent = seconds;
-
-            // 动态效果：数字颜色变化
-            const timerElement = document.getElementById('timer');
-            timerElement.style.transition = 'color 0.5s ease-in-out';
-            timerElement.style.color = `hsl(${(diff / 1000) % 360}, 100%, 50%)`; // 根据时间变化颜色
         }
 
         // 初始化计时器
         updateTimer();
-        setInterval(updateTimer, 1000); // 每秒更新一次
+        setInterval(updateTimer, 1000);
 
-        // 点击爱心弹出消息
-        function showMessage() {
-            alert("你愿意和我在一起吗？💖");
+        // 特别惊喜
+        function showSurprise() {
+            const messages = [
+                "点击信封查看秘密信件 ✉️",
+                "คุณคือความรักเดียวของฉัน",
+                "距离下次见面还有...",
+                "ฉันคิดถึงคุณเสมอ",
+                "我们的爱会跨越所有时区"
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
         }
+
+        // 秘密信件
+        function showLetter() {
+            const letter = `
+            📜 给金竹的秘密信件：
+
+            亲爱的น้องไก่...
+            
+            在这个特别的情人节，我想告诉你：
+            即使我们相隔2643公里，每天睁眼第一个想到的
+            依然是你微笑的样子。记得在曼谷机场的初见，
+            你的温柔善良，成了我最想念的模样。
+
+            虽然不能每天相见，但：
+            💌 每天早晨的问候
+            🌙 每晚的视频通话
+            ✈️ 每月积攒的机票
+            都是我们爱的见证
+            
+            等我，下次见面时...
+            我会带着你最喜欢的超臭螺狮粉
+            和迟到的情人节拥抱 ❤️
+
+            —— 永远爱你的 老孔
+            `;
+            alert(letter);
+        }
+
+        // 自动生成樱花
+        function createSakura() {
+            for(let i=0; i<20; i++){
+                const sakura = document.createElement('div');
+                sakura.className = 'sakura';
+                sakura.style.left = Math.random() * 100 + '%';
+                sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
+                document.body.appendChild(sakura);
+            }
+        }
+        createSakura();
     </script>
 </body>
 </html>
