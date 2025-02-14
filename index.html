@@ -119,20 +119,24 @@
             .thai-text { font-size: 1em; }
         }
 
-        /* 信封动画 */
-        .envelope {
+        /* 信封按钮样式 */
+        .envelope-button {
             position: fixed;
-            bottom: -100px;
+            bottom: 20px;
             right: 20px;
-            font-size: 40px;
-            animation: float 3s ease-in-out infinite;
+            font-size: 2em;
+            padding: 10px 20px;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            opacity: 0.9;
+            box-shadow: 0 0 10px rgba(255,51,102,0.5);
+            z-index: 2;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .envelope-button:hover {
+            background-color: #e02e5c;
         }
     </style>
 </head>
@@ -161,8 +165,8 @@
         <p>从曼谷到合肥<br>2643公里的距离<br>却隔不断心的靠近</p>
     </div>
 
-    <!-- 浮动信封 -->
-    <div class="envelope" onclick="showLetter()">✉️</div>
+    <!-- 显眼的信封按钮 -->
+    <button class="envelope-button" onclick="showLetter()">✉️ 查看秘密信件</button>
 
     <script>
         // 设置纪念日（修改为你们开始交往的日期）
