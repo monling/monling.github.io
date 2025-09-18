@@ -100,14 +100,14 @@
             </div>
             
             <!-- 2. 外部链接1：豆瓣电影 -->
-            <a href="https://www.douban.com/movie/" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
+            <a href="https://movie.douban.com/subject/1393859/" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
                         <i class="fa fa-film text-2xl text-love"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-gray-800">我们想看的电影</h2>
-                        <p class="text-gray-600 mt-1">豆瓣电影（外部网站）</p>
+                        <h2 class="text-xl font-bold text-gray-800">最近想看的电影</h2>
+                        <p class="text-gray-600 mt-1">老友记（在新窗口中打开）</p>
                         <span class="inline-block mt-1 text-xs bg-love/10 text-love px-2 py-0.5 rounded">外部链接</span>
                     </div>
                     <div class="ml-auto">
@@ -116,15 +116,15 @@
                 </div>
             </a>
             
-            <!-- 3. 内部链接1：情话合集 -->
-            <a href="love-words.html" class="topic-card">
+            <!-- 3. 内部链接1：2025情人节 -->
+            <a href="gift20250601.html" class="topic-card">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
                         <i class="fa fa-heart text-2xl text-love"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-gray-800">给你的情话</h2>
-                        <p class="text-gray-600 mt-1">每天一句甜甜的告白</p>
+                        <h2 class="text-xl font-bold text-gray-800">2025情人节</h2>
+                        <p class="text-gray-600 mt-1">2025.2.14情人节专题页面</p>
                     </div>
                     <div class="ml-auto">
                         <i class="fa fa-arrow-right text-love"></i>
@@ -147,24 +147,8 @@
                     </div>
                 </div>
             </a>
-            
-            <!-- 5. 外部链接2：大众点评（餐厅预订） -->
-            <a href="https://www.dianping.com" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
-                <div class="flex items-center">
-                    <div class="bg-tender p-4 rounded-full mr-4">
-                        <i class="fa fa-cutlery text-2xl text-love"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-gray-800">一起去吃好吃的</h2>
-                        <p class="text-gray-600 mt-1">大众点评（外部网站）</p>
-                        <span class="inline-block mt-1 text-xs bg-love/10 text-love px-2 py-0.5 rounded">外部链接</span>
-                    </div>
-                    <div class="ml-auto">
-                        <i class="fa fa-external-link text-love"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
+
+
         
         <!-- 页脚 -->
         <div class="mt-12 text-center text-gray-500 text-sm pb-6">
@@ -218,9 +202,10 @@
         // ===================== 1. 基础配置（方便你修改） =====================
         const MEET_DATE = new Date(2024, 11, 24); // 认识日期：2024年12月24日（月份0开始，12月=11）
         const POPUP_MESSAGE = `
-            今天路过上次一起去的奶茶店，
-            买了杯你最爱的珍珠奶茶，
-            等你下班一起喝呀～
+                  มอบกำไลเส้นเล็กๆ ให้เธอ หวังว่ามันจะอยู่กับเธอ<br>
+      เหมือนกับที่ฉันอยากอยู่เคียงข้างเธอเสมอ <br>
+      และยังเตรียมของเล็กๆ อีกชิ้นไว้ให้ รถของเธอจะได้สะอาดตลอดเวลา 🚗✨<br>
+      ไม่ว่าจะเป็นเธอ หรือชีวิตของเธอ ฉันก็อยากดูแลให้ดีที่สุด ❤️
         `; // 弹出消息内容
         const GALLERY_PASSWORD = "123456"; // 相册密码（建议改成你们的专属密码）
         const TARGET_PAGE = "memories.html"; // 相册页面路径（需和服务器文件一致）
