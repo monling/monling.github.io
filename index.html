@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>给亲爱的专属小站</title>
+    <!-- 引入外部资源 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind 配置（自定义颜色和字体） -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        love: '#FF6B8B',      // 温馨粉色
+                        love: '#FF6B8B',      // 主粉色（温馨）
                         sweet: '#FFB6C1',     // 浅粉色
                         tender: '#FFD1DC',    // 嫩粉色
-                        warm: '#FFF0F3',      // 极浅粉
+                        warm: '#FFF0F3',      // 极浅粉（背景）
                     },
                     fontFamily: {
-                        cute: ['"Comic Sans MS"', '"Marker Felt"', 'sans-serif'],
+                        cute: ['"Comic Sans MS"', '"Marker Felt"', 'sans-serif'], // 可爱字体
                     },
                 }
             }
         }
     </script>
+    
+    <!-- 自定义工具类 -->
     <style type="text/tailwindcss">
         @layer utilities {
             .topic-card {
@@ -30,40 +35,52 @@
                        transform hover:-translate-y-1 cursor-pointer border-2 border-tender;
             }
             .external-card {
-                @apply border-dashed border-love; /* 外部链接卡片用虚线边框区分 */
+                @apply border-dashed border-love; /* 外部链接卡片用虚线区分 */
             }
             .page-title {
                 @apply text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-love text-center mb-2;
             }
+            .day-counter {
+                @apply text-love font-bold text-[clamp(1.2rem,3vw,1.5rem)] text-center mb-4 
+                       flex items-center justify-center gap-2; /* 认识天数样式 */
+            }
             .page-subtitle {
                 @apply text-gray-600 text-center mb-8 font-cute;
             }
-            .password-modal {
+            .modal {
                 @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300;
             }
-            .password-modal.active {
-                @apply opacity-100 pointer-events-auto;
+            .modal.active {
+                @apply opacity-100 pointer-events-auto; /* 模态框显示状态 */
             }
             .modal-content {
                 @apply bg-white rounded-2xl p-6 w-full max-w-md transform scale-95 transition-transform duration-300;
             }
-            .password-modal.active .modal-content {
-                @apply scale-100;
+            .modal.active .modal-content {
+                @apply scale-100; /* 模态框弹出动画 */
+            }
+            .message-modal {
+                @apply top-8; /* 消息弹窗位置靠上，避免遮挡底部 */
             }
         }
     </style>
 </head>
 <body class="bg-warm min-h-screen font-cute">
     <div class="container mx-auto px-4 py-8 max-w-2xl">
-        <!-- 页面标题 -->
+        <!-- 页面标题区（含认识天数） -->
         <div class="mb-10 pt-4">
             <h1 class="page-title">给我最爱的人 ❤️</h1>
+            <!-- 认识天数显示 -->
+            <div class="day-counter">
+                <i class="fa fa-calendar"></i>
+                <span>我们已经认识 <span id="loveDays">0</span> 天啦</span>
+            </div>
             <p class="page-subtitle">这里有我们的点点滴滴</p>
         </div>
         
         <!-- 专题卡片区域 -->
         <div class="grid grid-cols-1 gap-6">
-            <!-- 带密码保护的相册 -->
+            <!-- 1. 带密码保护的相册（内部页面） -->
             <div class="topic-card" id="galleryCard">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
@@ -82,7 +99,7 @@
                 </div>
             </div>
             
-            <!-- 外部链接1：你们喜欢的电影网站 -->
+            <!-- 2. 外部链接1：豆瓣电影 -->
             <a href="https://www.douban.com/movie/" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
@@ -99,24 +116,7 @@
                 </div>
             </a>
             
-            <!-- 外部链接2：你们常去的餐厅预订 -->
-            <a href="https://www.dianping.com" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
-                <div class="flex items-center">
-                    <div class="bg-tender p-4 rounded-full mr-4">
-                        <i class="fa fa-cutlery text-2xl text-love"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-gray-800">一起去吃好吃的</h2>
-                        <p class="text-gray-600 mt-1">大众点评（外部网站）</p>
-                        <span class="inline-block mt-1 text-xs bg-love/10 text-love px-2 py-0.5 rounded">外部链接</span>
-                    </div>
-                    <div class="ml-auto">
-                        <i class="fa fa-external-link text-love"></i>
-                    </div>
-                </div>
-            </a>
-            
-            <!-- 内部专题：情话合集 -->
+            <!-- 3. 内部链接1：情话合集 -->
             <a href="love-words.html" class="topic-card">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
@@ -132,7 +132,7 @@
                 </div>
             </a>
             
-            <!-- 内部专题：恋爱清单 -->
+            <!-- 4. 内部链接2：恋爱清单 -->
             <a href="checklist.html" class="topic-card">
                 <div class="flex items-center">
                     <div class="bg-tender p-4 rounded-full mr-4">
@@ -147,6 +147,23 @@
                     </div>
                 </div>
             </a>
+            
+            <!-- 5. 外部链接2：大众点评（餐厅预订） -->
+            <a href="https://www.dianping.com" target="_blank" rel="noopener noreferrer" class="topic-card external-card">
+                <div class="flex items-center">
+                    <div class="bg-tender p-4 rounded-full mr-4">
+                        <i class="fa fa-cutlery text-2xl text-love"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">一起去吃好吃的</h2>
+                        <p class="text-gray-600 mt-1">大众点评（外部网站）</p>
+                        <span class="inline-block mt-1 text-xs bg-love/10 text-love px-2 py-0.5 rounded">外部链接</span>
+                    </div>
+                    <div class="ml-auto">
+                        <i class="fa fa-external-link text-love"></i>
+                    </div>
+                </div>
+            </a>
         </div>
         
         <!-- 页脚 -->
@@ -155,8 +172,8 @@
         </div>
     </div>
 
-    <!-- 密码输入模态框 -->
-    <div class="password-modal" id="passwordModal">
+    <!-- 模态框1：密码验证（相册专用） -->
+    <div class="modal" id="passwordModal">
         <div class="modal-content">
             <h3 class="text-xl font-bold text-love mb-4 text-center">请输入密码查看相册</h3>
             <p class="text-gray-600 text-center mb-5 text-sm">这是我们的专属回忆哦~</p>
@@ -168,87 +185,129 @@
             </div>
             
             <div class="flex gap-3">
-                <button id="cancelBtn" 
-                        class="flex-1 py-3 rounded-lg border-2 border-tender text-gray-700 hover:bg-tender/30 transition-colors">
+                <button id="cancelBtn" class="flex-1 py-3 rounded-lg border-2 border-tender text-gray-700 hover:bg-tender/30 transition-colors">
                     取消
                 </button>
-                <button id="confirmBtn" 
-                        class="flex-1 py-3 rounded-lg bg-love text-white hover:bg-love/90 transition-colors">
+                <button id="confirmBtn" class="flex-1 py-3 rounded-lg bg-love text-white hover:bg-love/90 transition-colors">
                     确认查看
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- 模态框2：自动弹出消息 -->
+    <div class="modal message-modal" id="messageModal">
+        <div class="modal-content">
+            <div class="text-center mb-4">
+                <i class="fa fa-heart text-4xl text-love animate-pulse"></i>
+            </div>
+            <h3 class="text-xl font-bold text-love mb-3 text-center">亲爱的💌</h3>
+            <div id="popupMessage" class="text-gray-700 text-center mb-6 leading-relaxed">
+                今天路过上次一起去的奶茶店，
+                买了杯你最爱的珍珠奶茶，
+                等你下班一起喝呀～
+            </div>
+            <button id="closeMessageBtn" class="w-full py-3 rounded-lg bg-love text-white hover:bg-love/90 transition-colors">
+                收到啦 ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- 核心功能 JavaScript -->
     <script>
-        // 配置密码（这里替换成你想要设置的密码）
-        const GALLERY_PASSWORD = "123456"; // 建议修改为你们的专属密码
-        const TARGET_PAGE = "memories.html"; // 目标相册页面
-        
+        // ===================== 1. 基础配置（方便你修改） =====================
+        const MEET_DATE = new Date(2024, 11, 24); // 认识日期：2024年12月24日（月份0开始，12月=11）
+        const POPUP_MESSAGE = `
+            今天路过上次一起去的奶茶店，
+            买了杯你最爱的珍珠奶茶，
+            等你下班一起喝呀～
+        `; // 弹出消息内容
+        const GALLERY_PASSWORD = "123456"; // 相册密码（建议改成你们的专属密码）
+        const TARGET_PAGE = "memories.html"; // 相册页面路径（需和服务器文件一致）
+
+        // ===================== 2. 认识天数计算 =====================
+        function calculateLoveDays() {
+            const today = new Date(); // 获取当前日期
+            const timeDiff = today - MEET_DATE; // 计算时间差（毫秒）
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // 转换为天数
+            document.getElementById('loveDays').textContent = days; // 显示到页面
+        }
+
+        // ===================== 3. 页面加载完成后执行所有功能 =====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // 3.1 计算并显示认识天数
+            calculateLoveDays();
+
+            // 3.2 显示自动弹出消息
+            document.getElementById('popupMessage').innerHTML = POPUP_MESSAGE;
+            setTimeout(() => {
+                document.getElementById('messageModal').classList.add('active');
+            }, 500); // 延迟500ms显示，避免和页面加载冲突
+
+            // 3.3 专题卡片加载动画
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                // 顺序显示卡片，增强视觉效果
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+
+        // ===================== 4. 弹出消息关闭功能 =====================
+        document.getElementById('closeMessageBtn').addEventListener('click', () => {
+            document.getElementById('messageModal').classList.remove('active');
+        });
+
+        // ===================== 5. 相册密码验证功能 =====================
         // 获取元素
         const galleryCard = document.getElementById('galleryCard');
         const passwordModal = document.getElementById('passwordModal');
         const passwordInput = document.getElementById('passwordInput');
         const confirmBtn = document.getElementById('confirmBtn');
         const cancelBtn = document.getElementById('cancelBtn');
-        
-        // 打开密码框
+
+        // 点击相册卡片，打开密码框
         galleryCard.addEventListener('click', () => {
             passwordModal.classList.add('active');
-            passwordInput.focus(); // 自动聚焦输入框
+            passwordInput.focus(); // 自动聚焦输入框，方便操作
         });
-        
-        // 关闭密码框
-        const closeModal = () => {
+
+        // 关闭密码框（清空输入）
+        function closePasswordModal() {
             passwordModal.classList.remove('active');
-            passwordInput.value = ''; // 清空输入
-        };
-        
-        cancelBtn.addEventListener('click', closeModal);
-        
-        // 点击模态框外部关闭
+            passwordInput.value = '';
+        }
+
+        // 取消按钮事件
+        cancelBtn.addEventListener('click', closePasswordModal);
+
+        // 点击密码框外部关闭
         passwordModal.addEventListener('click', (e) => {
-            if (e.target === passwordModal) {
-                closeModal();
-            }
+            if (e.target === passwordModal) closePasswordModal();
         });
-        
-        // 验证密码并跳转
-        const checkPassword = () => {
-            const inputPassword = passwordInput.value.trim();
-            
-            if (inputPassword === GALLERY_PASSWORD) {
-                // 密码正确，跳转到相册页面
-                window.location.href = TARGET_PAGE;
+
+        // 密码验证逻辑
+        function checkPassword() {
+            const inputPwd = passwordInput.value.trim();
+            if (inputPwd === GALLERY_PASSWORD) {
+                window.location.href = TARGET_PAGE; // 密码正确，跳转相册
             } else {
-                // 密码错误，提示并清空
-                alert('密码不正确哦~ 再试试吧');
+                alert('密码不正确哦~ 再试试吧'); // 密码错误，提示
                 passwordInput.value = '';
                 passwordInput.focus();
             }
-        };
-        
+        }
+
+        // 确认按钮事件
         confirmBtn.addEventListener('click', checkPassword);
-        
-        // 支持回车键确认
+
+        // 回车键触发密码验证（优化手机体验）
         passwordInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-        
-        // 页面加载动画
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.topic-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 * index);
-            });
+            if (e.key === 'Enter') checkPassword();
         });
     </script>
 </body>
