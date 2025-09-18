@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>给亲爱的专属小站</title>
-    <!-- 引入外部资源 -->
-<script src="https://cdn.tailwindcss.com?version=2025091801"></script>
-<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?ver=1.2" rel="stylesheet">
+    <!-- 引入外部资源（确保CDN链接有效，版本号保留） -->
+    <script src="https://cdn.tailwindcss.com?version=2025091801"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?ver=1.2" rel="stylesheet">
     
-    <!-- Tailwind 配置（自定义颜色和字体） -->
+    <!-- Tailwind 配置（自定义颜色和字体，确保生效） -->
     <script>
         tailwind.config = {
             theme: {
@@ -27,7 +27,7 @@
         }
     </script>
     
-    <!-- 自定义工具类 -->
+    <!-- 自定义工具类（确保@layer utilities语法正确） -->
     <style type="text/tailwindcss">
         @layer utilities {
             .topic-card {
@@ -70,7 +70,7 @@
         <!-- 页面标题区（含认识天数） -->
         <div class="mb-10 pt-4">
             <h1 class="page-title">给我最爱的人 ❤️</h1>
-            <!-- 认识天数显示 -->
+            <!-- 认识天数显示（含日历图标，确保样式生效） -->
             <div class="day-counter">
                 <i class="fa fa-calendar"></i>
                 <span>我们已经认识 <span id="loveDays">0</span> 天啦</span>
@@ -78,7 +78,7 @@
             <p class="page-subtitle">这里有我们的点点滴滴</p>
         </div>
         
-        <!-- 专题卡片区域 -->
+        <!-- 专题卡片区域（关键：补充闭合标签</div>） -->
         <div class="grid grid-cols-1 gap-6">
             <!-- 1. 带密码保护的相册（内部页面） -->
             <div class="topic-card" id="galleryCard">
@@ -131,15 +131,15 @@
                     </div>
                 </div>
             </a>
-            
+        </div> <!-- 关键修复：补充专题卡片区域的闭合标签 -->
         
-        <!-- 页脚 -->
+        <!-- 页脚（现在会正确渲染在卡片下方） -->
         <div class="mt-12 text-center text-gray-500 text-sm pb-6">
             <p>更新于：2025年9月 ❤️</p>
         </div>
-    </div>
+    </div> <!-- 页面容器闭合 -->
 
-    <!-- 模态框1：密码验证（相册专用） -->
+    <!-- 模态框1：密码验证（相册专用，样式正常） -->
     <div class="modal" id="passwordModal">
         <div class="modal-content">
             <h3 class="text-xl font-bold text-love mb-4 text-center">请输入密码查看相册</h3>
@@ -162,17 +162,18 @@
         </div>
     </div>
 
-    <!-- 模态框2：自动弹出消息 -->
+    <!-- 模态框2：自动弹出消息（含爱心脉冲动画） -->
     <div class="modal message-modal" id="messageModal">
         <div class="modal-content">
             <div class="text-center mb-4">
-                <i class="fa fa-heart text-4xl text-love animate-pulse"></i>
+                <i class="fa fa-heart text-4xl text-love animate-pulse"></i> <!-- 脉冲动画生效 -->
             </div>
             <h3 class="text-xl font-bold text-love mb-3 text-center">亲爱的💌</h3>
             <div id="popupMessage" class="text-gray-700 text-center mb-6 leading-relaxed">
-                今天路过上次一起去的奶茶店，
-                买了杯你最爱的珍珠奶茶，
-                等你下班一起喝呀～
+                มอบกำไลเส้นเล็กๆ ให้เธอ หวังว่ามันจะอยู่กับเธอ<br>
+                เหมือนกับที่ฉันอยากอยู่เคียงข้างเธอเสมอ <br>
+                และยังเตรียมของเล็กๆ อีกชิ้นไว้ให้ รถของเธอจะได้สะอาดตลอดเวลา 🚗✨<br>
+                ไม่ว่าจะเป็นเธอ หรือชีวิตของเธอ ฉันก็อยากดูแลให้ดีที่สุด ❤️
             </div>
             <button id="closeMessageBtn" class="w-full py-3 rounded-lg bg-love text-white hover:bg-love/90 transition-colors">
                 收到啦 ❤️
@@ -180,7 +181,7 @@
         </div>
     </div>
 
-    <!-- 核心功能 JavaScript -->
+    <!-- 核心功能 JavaScript（确保所有事件绑定正常） -->
     <script>
         // ===================== 1. 基础配置（方便你修改） =====================
         const MEET_DATE = new Date(2024, 11, 24); // 认识日期：2024年12月24日（月份0开始，12月=11）
@@ -203,25 +204,24 @@
 
         // ===================== 3. 页面加载完成后执行所有功能 =====================
         document.addEventListener('DOMContentLoaded', () => {
-            // 3.1 计算并显示认识天数
+            // 3.1 计算并显示认识天数（确保数字正常更新）
             calculateLoveDays();
 
-            // 3.2 显示自动弹出消息
+            // 3.2 显示自动弹出消息（500ms延迟，避免加载冲突）
             document.getElementById('popupMessage').innerHTML = POPUP_MESSAGE;
             setTimeout(() => {
                 document.getElementById('messageModal').classList.add('active');
-            }, 500); // 延迟500ms显示，避免和页面加载冲突
+            }, 500);
 
-            // 3.3 专题卡片加载动画
+            // 3.3 专题卡片加载动画（顺序弹出，确保过渡效果）
             const cards = document.querySelectorAll('.topic-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(10px)';
-                // 顺序显示卡片，增强视觉效果
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 100 * index);
+                }, 100 * index); // 每个卡片延迟100ms，形成顺序动画
             });
         });
 
